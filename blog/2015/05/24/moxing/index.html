@@ -1,0 +1,166 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>一对多关联模型插入问题 - My Octopress Blog</title>
+	<meta name="author" content="Your Name">
+
+	
+	<meta name="description" content="最近一个问题搞了我一天，加了各种群，问了各种“大神”都没解决，只能自己老老实实的解决。
+问题是这样的：有个一对多的关联模型，比如一个商品有多张图片，现在在发布商品的时候要进行关联插入。 手册上有个一对一关联模型数据写入的例子： 这个一看就懂，但是这是一对一啊，一对多该怎么写呢？手册根本没说， &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">My Octopress Blog</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/PHP">PHP</a></li>
+	<li><a href="/MYSQL">MySQL</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/PHP">PHP</a></li>
+	<li><a href="/MYSQL">MySQL</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:heilang007.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:heilang007.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">一对多关联模型插入问题</h2>
+	<div class="entry-content"><p>最近一个问题搞了我一天，加了各种群，问了各种“大神”都没解决，只能自己老老实实的解决。
+问题是这样的：有个一对多的关联模型，比如一个商品有多张图片，现在在发布商品的时候要进行关联插入。</p>
+
+<h2>手册上有个一对一关联模型数据写入的例子：</h2>
+
+<p><img src="http://www.thinkphp.cn/Uploads/editor/2015-05-21/555dd859d3527.png" alt="image" /></p>
+
+<p>这个一看就懂，但是这是一对一啊，一对多该怎么写呢？手册根本没说，于是我猜测应该这样写：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$date['Profile']=array(
+</span><span class='line'>              array(/*TODO*/),
+</span><span class='line'>              array(/*TODO*/)
+</span><span class='line'> );</span></code></pre></td></tr></table></div></figure>
+
+
+<p>与是我就这样做了，可是仍然没有成功，我也不知道问题出在哪里？
+我随机改变了一下配置打开了页面Trace，可以竟然看不到错误。我很郁闷，我想了想原来是因为我用了$this->error();发生了页面跳转，所以错误信息就看不到了。我随机删掉了跳转语句，看到了SQL语句的错误，竟然是我的一个数据库字段名写错了。改了之后就成功了。
+希望对你们有帮助！</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-24T10:52:39+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    Your Name
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>
