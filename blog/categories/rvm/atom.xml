@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rvm | My Octopress Blog]]></title>
+  <link href="http://heilang007.github.io/blog/categories/rvm/atom.xml" rel="self"/>
+  <link href="http://heilang007.github.io/"/>
+  <updated>2015-05-24T09:05:29+08:00</updated>
+  <id>http://heilang007.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac上更新Ruby]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/24/newblog/"/>
+    <updated>2015-05-24T08:36:08+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/24/newblog</id>
+    <content type="html"><![CDATA[<h2>安装RVM</h2>
+
+<p><strong> RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) </strong></p>
+
+<pre><code>$ curl -L get.rvm.io | bash -s stable 
+</code></pre>
+
+<h2>等待一段时间后就可以成功安装好 RVM。</h2>
+
+<pre><code>$ source ~/.bashrc  
+$ source ~/.bash_profile 
+</code></pre>
+
+<h2>测试是否安装正常</h2>
+
+<pre><code>rvm -v
+</code></pre>
+
+<h2>2、用RVM升级Ruby</h2>
+
+<h1>查看当前<a href="http://ruby.taobao.org">ruby</a>版本</h1>
+
+<pre><code>$ ruby -v  
+ruby 1.8.7
+</code></pre>
+
+<h1>列出已知的ruby版本</h1>
+
+<pre><code class="">$ rvm list known
+</code></pre>
+
+<h1>安装ruby 1.9.3</h1>
+
+<pre><code class="">$ rvm install 1.9.3  
+</code></pre>
+
+<p><img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="image" /></p>
+]]></content>
+  </entry>
+  
+</feed>
