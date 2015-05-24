@@ -4,7 +4,7 @@
   <title><![CDATA[开源中国技术博客]]></title>
   <link href="http://heilang007.github.io/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-24T15:56:32+08:00</updated>
+  <updated>2015-05-24T20:49:11+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Fan Jun]]></name>
@@ -12,6 +12,198 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP+jQuery+Ajax设置抽奖奖品和中奖概率]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/24/choujiang/"/>
+    <updated>2015-05-24T20:43:46+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/24/choujiang</id>
+    <content type="html"><![CDATA[<p>分享一款jQuery九宫格大转盘抽奖代码网页特效，点击抽奖按钮开始随机抽奖选择奖品，可设置起点位置、奖品数量、转动次数、中奖位置参数，并且后台ajax.php可设置奖品和中奖概率。
+<img src="http://www.thinkphp.cn/Uploads/editor/2015-05-24/556117559c577.png" alt="image" /></p>
+
+<p>首先我们在#lottery放置12个奖品，代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;div id="lottery"&gt; 
+</span><span class='line'>    &lt;table border="0" cellpadding="0" cellspacing="0"&gt; 
+</span><span class='line'>        &lt;tr&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-0"&gt;&lt;img src="images/1.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-1"&gt;&lt;img src="images/2.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-2"&gt;&lt;img src="images/4.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-3"&gt;&lt;img src="images/3.png"&gt;&lt;/td&gt; 
+</span><span class='line'>        &lt;/tr&gt; 
+</span><span class='line'>        &lt;tr&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-11"&gt;&lt;img src="images/7.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td colspan="2" rowspan="2"&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-4"&gt;&lt;img src="images/5.png"&gt;&lt;/td&gt; 
+</span><span class='line'>        &lt;/tr&gt; 
+</span><span class='line'>        &lt;tr&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-10"&gt;&lt;img src="images/1.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-5"&gt;&lt;img src="images/6.png"&gt;&lt;/td&gt; 
+</span><span class='line'>        &lt;/tr&gt; 
+</span><span class='line'>        &lt;tr&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-9"&gt;&lt;img src="images/3.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-8"&gt;&lt;img src="images/6.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-7"&gt;&lt;img src="images/8.png"&gt;&lt;/td&gt; 
+</span><span class='line'>            &lt;td class="lottery-unit lottery-unit-6"&gt;&lt;img src="images/7.png"&gt;&lt;/td&gt; 
+</span><span class='line'>        &lt;/tr&gt; 
+</span><span class='line'>    &lt;/table&gt; 
+</span><span class='line'> &lt;/div&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>点击“开始抽奖”按钮，并且远程ajax.php获取奖项：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>$(function() { 
+</span><span class='line'>    lottery.init('lottery'); 
+</span><span class='line'>    $("#lottery a").click(function() { 
+</span><span class='line'>        if (click) { 
+</span><span class='line'>            return false; 
+</span><span class='line'>        } else { 
+</span><span class='line'>            lottery.speed = 100; 
+</span><span class='line'>            $.post("ajax.php", { 
+</span><span class='line'>                uid: 1 
+</span><span class='line'>            }, 
+</span><span class='line'>            function(data) { //获取奖品，也可以在这里判断是否登陆状态 
+</span><span class='line'>                $("#lottery").attr("prize_site", data.prize_site); 
+</span><span class='line'>                $("#lottery").attr("prize_id", data.prize_id); 
+</span><span class='line'>                $("#lottery").attr("prize_name", data.prize_name); 
+</span><span class='line'>                roll(); 
+</span><span class='line'>                click = true; 
+</span><span class='line'>                return false; 
+</span><span class='line'>            }, 
+</span><span class='line'>            "json") 
+</span><span class='line'>        } 
+</span><span class='line'>    }); 
+</span><span class='line'> })
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ajax.php</h2>
+
+<p>12个奖品数组如下，其中prize表示奖项内容，v表示中奖几率(若数组中七个奖项的v的总和为100，如果v的值为1，则代表中奖几率为1%，依此类推)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$prize_arr = array( 
+</span><span class='line'>    '0' =&gt; array('id' =&gt; 1, 'prize' =&gt; '一等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '1' =&gt; array('id' =&gt; 2, 'prize' =&gt; '二等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '2' =&gt; array('id' =&gt; 3, 'prize' =&gt; '三等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '3' =&gt; array('id' =&gt; 4, 'prize' =&gt; '四等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '4' =&gt; array('id' =&gt; 5, 'prize' =&gt; '五等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '5' =&gt; array('id' =&gt; 6, 'prize' =&gt; '六等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '6' =&gt; array('id' =&gt; 7, 'prize' =&gt; '七等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '7' =&gt; array('id' =&gt; 8, 'prize' =&gt; '八等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '8' =&gt; array('id' =&gt; 9, 'prize' =&gt; '九等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '9' =&gt; array('id' =&gt; 10, 'prize' =&gt; '十等奖', 'v' =&gt; 5), 
+</span><span class='line'>    '10' =&gt; array('id' =&gt; 11, 'prize' =&gt; '十一等奖', 'v' =&gt; 25), 
+</span><span class='line'>    '11' =&gt; array('id' =&gt; 12, 'prize' =&gt; '十二等奖', 'v' =&gt; 25), 
+</span><span class='line'> );
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>获取随机奖品：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>foreach ($prize_arr as $k=&gt;$v) { 
+</span><span class='line'>    $arr[$v['id']] = $v['v']; 
+</span><span class='line'> 
+</span><span class='line'> } 
+</span><span class='line'> 
+</span><span class='line'>$prize_id = getRand($arr); //根据概率获取奖项id  
+</span><span class='line'> foreach($prize_arr as $k=&gt;$v){ //获取前端奖项位置 
+</span><span class='line'>    if($v['id'] == $prize_id){ 
+</span><span class='line'>     $prize_site = $k; 
+</span><span class='line'>     break; 
+</span><span class='line'>    } 
+</span><span class='line'> } 
+</span><span class='line'>$res = $prize_arr[$prize_id - 1]; //中奖项  
+</span><span class='line'> 
+</span><span class='line'>$data['prize_name'] = $res['prize']; 
+</span><span class='line'>$data['prize_site'] = $prize_site;//前端奖项从-1开始 
+</span><span class='line'>echo json_encode($data);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://www.sucaihuo.com/php/129.html">PHP抽奖演示：</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一对多关联模型插入问题]]></title>

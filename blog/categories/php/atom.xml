@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | 开源中国技术博客]]></title>
   <link href="http://heilang007.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-24T15:56:32+08:00</updated>
+  <updated>2015-05-24T20:49:11+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Fan Jun]]></name>
@@ -12,6 +12,119 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP+jQuery+Ajax设置抽奖奖品和中奖概率]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/24/choujiang/"/>
+    <updated>2015-05-24T20:43:46+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/24/choujiang</id>
+    <content type="html"><![CDATA[<p>分享一款jQuery九宫格大转盘抽奖代码网页特效，点击抽奖按钮开始随机抽奖选择奖品，可设置起点位置、奖品数量、转动次数、中奖位置参数，并且后台ajax.php可设置奖品和中奖概率。
+<img src="http://www.thinkphp.cn/Uploads/editor/2015-05-24/556117559c577.png" alt="image" /></p>
+
+<p>首先我们在#lottery放置12个奖品，代码如下：</p>
+
+<p>```</p>
+
+<div id="lottery"> 
+    <table border="0" cellpadding="0" cellspacing="0"> 
+        <tr> 
+            <td class="lottery-unit lottery-unit-0"><img src="images/1.png"></td> 
+            <td class="lottery-unit lottery-unit-1"><img src="images/2.png"></td> 
+            <td class="lottery-unit lottery-unit-2"><img src="images/4.png"></td> 
+            <td class="lottery-unit lottery-unit-3"><img src="images/3.png"></td> 
+        </tr> 
+        <tr> 
+            <td class="lottery-unit lottery-unit-11"><img src="images/7.png"></td> 
+            <td colspan="2" rowspan="2"><a href="#"></a></td> 
+            <td class="lottery-unit lottery-unit-4"><img src="images/5.png"></td> 
+        </tr> 
+        <tr> 
+            <td class="lottery-unit lottery-unit-10"><img src="images/1.png"></td> 
+            <td class="lottery-unit lottery-unit-5"><img src="images/6.png"></td> 
+        </tr> 
+        <tr> 
+            <td class="lottery-unit lottery-unit-9"><img src="images/3.png"></td> 
+            <td class="lottery-unit lottery-unit-8"><img src="images/6.png"></td> 
+            <td class="lottery-unit lottery-unit-7"><img src="images/8.png"></td> 
+            <td class="lottery-unit lottery-unit-6"><img src="images/7.png"></td> 
+        </tr> 
+    </table> 
+ </div>
+
+
+<pre><code>点击“开始抽奖”按钮，并且远程ajax.php获取奖项：
+</code></pre>
+
+<p>$(function() {
+    lottery.init(&lsquo;lottery&rsquo;);
+    $(&ldquo;#lottery a&rdquo;).click(function() {
+        if (click) {
+            return false;
+        } else {
+            lottery.speed = 100;
+            $.post(&ldquo;ajax.php&rdquo;, {
+                uid: 1
+            },
+            function(data) { //获取奖品，也可以在这里判断是否登陆状态
+                $(&ldquo;#lottery&rdquo;).attr(&ldquo;prize_site&rdquo;, data.prize_site);
+                $(&ldquo;#lottery&rdquo;).attr(&ldquo;prize_id&rdquo;, data.prize_id);
+                $(&ldquo;#lottery&rdquo;).attr(&ldquo;prize_name&rdquo;, data.prize_name);
+                roll();
+                click = true;
+                return false;
+            },
+            &ldquo;json&rdquo;)
+        }
+    });
+ })</p>
+
+<pre><code>
+## Ajax.php
+12个奖品数组如下，其中prize表示奖项内容，v表示中奖几率(若数组中七个奖项的v的总和为100，如果v的值为1，则代表中奖几率为1%，依此类推)
+</code></pre>
+
+<p>$prize_arr = array(
+    &lsquo;0&rsquo; => array(&lsquo;id&rsquo; => 1, &lsquo;prize&rsquo; => &lsquo;一等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;1&rsquo; => array(&lsquo;id&rsquo; => 2, &lsquo;prize&rsquo; => &lsquo;二等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;2&rsquo; => array(&lsquo;id&rsquo; => 3, &lsquo;prize&rsquo; => &lsquo;三等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;3&rsquo; => array(&lsquo;id&rsquo; => 4, &lsquo;prize&rsquo; => &lsquo;四等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;4&rsquo; => array(&lsquo;id&rsquo; => 5, &lsquo;prize&rsquo; => &lsquo;五等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;5&rsquo; => array(&lsquo;id&rsquo; => 6, &lsquo;prize&rsquo; => &lsquo;六等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;6&rsquo; => array(&lsquo;id&rsquo; => 7, &lsquo;prize&rsquo; => &lsquo;七等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;7&rsquo; => array(&lsquo;id&rsquo; => 8, &lsquo;prize&rsquo; => &lsquo;八等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;8&rsquo; => array(&lsquo;id&rsquo; => 9, &lsquo;prize&rsquo; => &lsquo;九等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;9&rsquo; => array(&lsquo;id&rsquo; => 10, &lsquo;prize&rsquo; => &lsquo;十等奖&rsquo;, &lsquo;v&rsquo; => 5),
+    &lsquo;10&rsquo; => array(&lsquo;id&rsquo; => 11, &lsquo;prize&rsquo; => &lsquo;十一等奖&rsquo;, &lsquo;v&rsquo; => 25),
+    &lsquo;11&rsquo; => array(&lsquo;id&rsquo; => 12, &lsquo;prize&rsquo; => &lsquo;十二等奖&rsquo;, &lsquo;v&rsquo; => 25),
+ );</p>
+
+<pre><code>
+获取随机奖品：
+</code></pre>
+
+<p>foreach ($prize_arr as $k=>$v) {
+    $arr[$v[&lsquo;id&rsquo;]] = $v[&lsquo;v&rsquo;];</p>
+
+<p> }</p>
+
+<p>$prize_id = getRand($arr); //根据概率获取奖项id<br/>
+ foreach($prize_arr as $k=>$v){ //获取前端奖项位置
+    if($v[&lsquo;id&rsquo;] == $prize_id){
+     $prize_site = $k;
+     break;
+    }
+ }
+$res = $prize_arr[$prize_id - 1]; //中奖项</p>
+
+<p>$data[&lsquo;prize_name&rsquo;] = $res[&lsquo;prize&rsquo;];
+$data[&lsquo;prize_site&rsquo;] = $prize_site;//前端奖项从-1开始
+echo json_encode($data);</p>
+
+<p>```</p>
+
+<p><a href="http://www.sucaihuo.com/php/129.html">PHP抽奖演示：</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一对多关联模型插入问题]]></title>

@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>开源中国技术博客</title>
+	<title>PHP+jQuery+Ajax设置抽奖奖品和中奖概率 - 开源中国技术博客</title>
 	<meta name="author" content="Fan Jun">
 
 	
@@ -89,18 +89,9 @@
 	
 		
 	
-	<div id="content" class="inner">
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/05/24/choujiang/">
-		
-			PHP+jQuery+Ajax设置抽奖奖品和中奖概率</a>
-	</h2>
-	<div class="entry-content">
-		<p>分享一款jQuery九宫格大转盘抽奖代码网页特效，点击抽奖按钮开始随机抽奖选择奖品，可设置起点位置、奖品数量、转动次数、中奖位置参数，并且后台ajax.php可设置奖品和中奖概率。
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">PHP+jQuery+Ajax设置抽奖奖品和中奖概率</h2>
+	<div class="entry-content"><p>分享一款jQuery九宫格大转盘抽奖代码网页特效，点击抽奖按钮开始随机抽奖选择奖品，可设置起点位置、奖品数量、转动次数、中奖位置参数，并且后台ajax.php可设置奖品和中奖概率。
 <img src="http://www.thinkphp.cn/Uploads/editor/2015-05-24/556117559c577.png" alt="image" /></p>
 
 <p>首先我们在#lottery放置12个奖品，代码如下：</p>
@@ -284,10 +275,7 @@
 
 
 <p><a href="http://www.sucaihuo.com/php/129.html">PHP抽奖演示：</a></p>
-
-		
-		
-	</div>
+</div>
 
 
 <div class="meta">
@@ -315,388 +303,43 @@
 </div>
 </article>
 
-
-    <article class="post">
-	<h2 class="title">
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
 		
-		<a href="/blog/2015/05/24/moxing/">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 		
-			一对多关联模型插入问题</a>
-	</h2>
-	<div class="entry-content">
-		<p>最近一个问题搞了我一天，加了各种群，问了各种“大神”都没解决，只能自己老老实实的解决。
-问题是这样的：有个一对多的关联模型，比如一个商品有多张图片，现在在发布商品的时候要进行关联插入。</p>
-
-<h2>手册上有个一对一关联模型数据写入的例子：</h2>
-
-<p><img src="http://www.thinkphp.cn/Uploads/editor/2015-05-21/555dd859d3527.png" alt="image" /></p>
-
-<p>这个一看就懂，但是这是一对一啊，一对多该怎么写呢？手册根本没说，于是我猜测应该这样写：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$date['Profile']=array(
-</span><span class='line'>              array(/*TODO*/),
-</span><span class='line'>              array(/*TODO*/)
-</span><span class='line'> );</span></code></pre></td></tr></table></div></figure>
-
-
-<p>与是我就这样做了，可是仍然没有成功，我也不知道问题出在哪里？
-我随机改变了一下配置打开了页面Trace，可以竟然看不到错误。我很郁闷，我想了想原来是因为我用了$this->error();发生了页面跳转，所以错误信息就看不到了。我随机删掉了跳转语句，看到了SQL语句的错误，竟然是我的一个数据库字段名写错了。改了之后就成功了。
-希望对你们有帮助！</p>
-
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
 		
 		
 	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-24T10:52:39+08:00" pubdate data-updated="true"></time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/php/'>php</a>
-
-
-</div>
 	
 </div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/05/24/fenye/">
-		
-			Thinkphp 漂亮的分页样式</a>
-	</h2>
-	<div class="entry-content">
-		<p>首先:需要两个文件 page.class.php page.css
-1.在TP原有的 page.class.php 文件稍作修改几条代码就可以了, 修改过的地方我会注释,
-2.page.css 这个是24款分页的样式
-在模版中使用, 引入 page.css</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;load href=" !-PUBLIC-!/Css/page.css" / &gt; 
-</span><span class='line'>&lt;div class="green-black"&gt;&lt;{$page}&gt;&lt;div/&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果: 要变更分页的样式, 打开 page.css ,参照修改相对应的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;div class ="xxx"&gt;&lt;{$page}&gt;&lt;/div&gt; 即可
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果图:</p>
-
-<p><img src="http://www.thinkphp.cn/Uploads/editor/2013-06-29/51cea617a001e.png" alt="image" />
-<img src="http://www.thinkphp.cn/Uploads/editor/2013-06-29/51cea6d236b40.png" alt="image" /></p>
-
-<h2>有问题可以联系: QQ303440188 或php交流群 278528223</h2>
-
-<p><a href="http://www.thinkphp.cn/topic/download/id/2923.html">thinkphp分页.rar</a></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-24T10:45:02+08:00" pubdate data-updated="true"></time></div>
-	<div class="tags">
-
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2015/05/24/choujiang" data-title="PHP+jQuery+Ajax设置抽奖奖品和中奖概率" data-url="http://heilang007.github.io/blog/2015/05/24/choujiang/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"heilang007"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
 </div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/05/24/twoblog/">
-		
-			Dede后台验证码不显示解决方法详解(dedecms 5.7)</a>
-	</h2>
-	<div class="entry-content">
-		<h2>通用解决方案&mdash;取消后台验证码功能</h2>
-
-<p>因为没有验证码 不能进后台 所以修改php文件源代码:</p>
-
-<p><code>方法一:</code></p>
-
-<p>打开dede/login.php 找到如下代码</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>    if(($validate=='' || $validate != $svali) && preg_match("/6/",$safe_gdopen)){
-</span><span class='line'>
-</span><span class='line'>        ResetVdValue();
-</span><span class='line'>
-</span><span class='line'>        ShowMsg('验证码不正确!','login.php',0,1000);
-</span><span class='line'>
-</span><span class='line'>        exit;
-</span><span class='line'>
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第一行替换为   if(false){</p>
-
-<p>好 问题解决 不输验证码后台直接进去</p>
-
-<p><code>方法二</code></p>
-
-<p>打开data/safe/inc.safe.config.php</p>
-
-<p>把代码$safe_gdopen = &lsquo;1,2,3,4,5,6,7&rsquo;; 中的6,删除即可</p>
-
-<p>Dede后台验证码不显示情况一分析</p>
-
-<p>验证码需要GD库 请检查你的环境是否开启GD库</p>
-
-<p> Dede后台验证码不显示情况二分析</p>
-
-<p>验证码只显示背景 不显示字母</p>
-
-<p>打开验证码生成文件 Include/vdimgck.php</p>
-
-<p>找到</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for($i=0;$i&lt;$rndcodelen;$i++)
-</span><span class='line'>
-</span><span class='line'>{
-</span><span class='line'>
-</span><span class='line'>    $bc = mt_rand(0, 1);
-</span><span class='line'>
-</span><span class='line'>    $rndstring[$i] = strtoupper($rndstring[$i]);
-</span><span class='line'>
-</span><span class='line'>    $c_fontColor = $fontColor[mt_rand(0,4)];
-</span><span class='line'>
-</span><span class='line'>    $y_pos = $i==0 ? 4 : $i*($font_size+2);
-</span><span class='line'>
-</span><span class='line'>    $c = mt_rand(0, 15);
-</span><span class='line'>
-</span><span class='line'>    @imagettftext($im, $font_size, $c, $y_pos, 19, $c_fontColor, $font_file, $rndstring[$i]);
-</span><span class='line'>
-</span><span class='line'>    $lastc = $rndstring[$i];
-</span><span class='line'>
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Imagettftext()函数没有成功的执行导致了验证码只显示背景 不显示字母</p>
-
-<p>具体原因为 字体文件路径不对.解决方法</p>
-
-<p>1确认include/data/fonts/ 里面存在字体文件  默认为ggbi.ttf</p>
-
-<p>2在for($i=0;$i&lt;$rndcodelen;$i++) 上一行 加上如下代码:</p>
-
-<pre><code>        $font_file= str_replace("\\","/",$font_file);
-</code></pre>
-
-<p> 即把字体文件路径中反斜杠替换成斜杠 因为我们知道反斜杠有转译字符的功能,</p>
-
-<p>$font_file 路经大体为 盘符:\appserv\www 系统错误的把反斜杠 当作转义用了 导致$font_file也就不是一个路径了 所以Imagettftext()函数总是返回错误</p>
-
-<p>加上$font_file= str_replace(&ldquo;\&rdquo;,&ldquo;/&rdquo;,$font_file);即可解决</p>
-
-<p>Dede后台验证码不显示情况三分析</p>
-
-<p> Include/data/words/words.txt 文件不存在</p>
-
-<p><code>解决方案1</code> 拷贝一个进去</p>
-
-<pre><code>           2找到代码    'word_type'  =&gt; (int)$safe_codetype,   // 1:数字  2:英文   3:单词
-
-            换成'word_type'  =&gt;1  (或2) 既验证码为数字或英文
-</code></pre>
-
-<p>Dede后台验证码不显示 全部情况解决</p>
-
-<p>如果原来可以显示后来取消验证码后再设置就无法显示，可以通过覆盖data与include目录试试。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-24T08:36:08+08:00" pubdate data-updated="true"></time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/rvm/'>rvm</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/05/24/newblog/">
-		
-			Mac上更新Ruby</a>
-	</h2>
-	<div class="entry-content">
-		<h2>安装RVM</h2>
-
-<p><strong> RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) </strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -L get.rvm.io | bash -s stable </span></code></pre></td></tr></table></div></figure>
-
-
-<h2>等待一段时间后就可以成功安装好 RVM。</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bashrc  
-</span><span class='line'>$ source ~/.bash_profile </span></code></pre></td></tr></table></div></figure>
-
-
-<h2>测试是否安装正常</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rvm -v</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>2、用RVM升级Ruby</h2>
-
-<h1>查看当前<a href="http://ruby.taobao.org">ruby</a>版本</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby -v  
-</span><span class='line'>ruby 1.8.7</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h1>列出已知的ruby版本</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm list known</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h1>安装ruby 1.9.3</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.3  </span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="image" /></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-24T08:36:08+08:00" pubdate data-updated="true"></time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/rvm/'>rvm</a>
-
-
-</div>
-	
-</div>
-</article>
-
-<nav id="pagenavi">
-    
-    
-    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
-</nav>
+</section>
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2015
 
