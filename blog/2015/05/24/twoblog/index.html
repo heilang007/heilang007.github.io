@@ -3,14 +3,20 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>第二Mac上更新Ruby - My Octopress Blog</title>
+	<title>Dede后台验证码不显示解决方法详解(dedecms 5.7) - My Octopress Blog</title>
 	<meta name="author" content="Your Name">
 
 	
-	<meta name="description" content="安装RVM RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) 1
-$ curl -L get.rvm.io | bash -s stable 等待一段时间后就可以成功安装好 RVM。 1
+	<meta name="description" content="通用解决方案&mdash;取消后台验证码功能 因为没有验证码 不能进后台 所以修改php文件源代码: 方法一: 打开dede/login.php 找到如下代码 1
 2
-$ source ~/. &hellip;">
+3
+4
+5
+6
+7
+8
+9
+10 if(($validate=='' || $validate != $svali) && &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,56 +87,131 @@ $ source ~/. &hellip;">
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">第二Mac上更新Ruby</h2>
-	<div class="entry-content"><h2>安装RVM</h2>
+	<h2 class="title">Dede后台验证码不显示解决方法详解(dedecms 5.7)</h2>
+	<div class="entry-content"><h2>通用解决方案&mdash;取消后台验证码功能</h2>
 
-<p><strong> RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) </strong></p>
+<p>因为没有验证码 不能进后台 所以修改php文件源代码:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -L get.rvm.io | bash -s stable </span></code></pre></td></tr></table></div></figure>
+<p><code>方法一:</code></p>
 
-
-<h2>等待一段时间后就可以成功安装好 RVM。</h2>
+<p>打开dede/login.php 找到如下代码</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bashrc  
-</span><span class='line'>$ source ~/.bash_profile </span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>    if(($validate=='' || $validate != $svali) && preg_match("/6/",$safe_gdopen)){
+</span><span class='line'>
+</span><span class='line'>        ResetVdValue();
+</span><span class='line'>
+</span><span class='line'>        ShowMsg('验证码不正确!','login.php',0,1000);
+</span><span class='line'>
+</span><span class='line'>        exit;
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>测试是否安装正常</h2>
+<p>第一行替换为   if(false){</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rvm -v</span></code></pre></td></tr></table></div></figure>
+<p>好 问题解决 不输验证码后台直接进去</p>
 
+<p><code>方法二</code></p>
 
-<h2>2、用RVM升级Ruby</h2>
+<p>打开data/safe/inc.safe.config.php</p>
 
-<h1>查看当前<a href="http://ruby.taobao.org">ruby</a>版本</h1>
+<p>把代码$safe_gdopen = &lsquo;1,2,3,4,5,6,7&rsquo;; 中的6,删除即可</p>
+
+<p>Dede后台验证码不显示情况一分析</p>
+
+<p>验证码需要GD库 请检查你的环境是否开启GD库</p>
+
+<p> Dede后台验证码不显示情况二分析</p>
+
+<p>验证码只显示背景 不显示字母</p>
+
+<p>打开验证码生成文件 Include/vdimgck.php</p>
+
+<p>找到</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby -v  
-</span><span class='line'>ruby 1.8.7</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for($i=0;$i&lt;$rndcodelen;$i++)
+</span><span class='line'>
+</span><span class='line'>{
+</span><span class='line'>
+</span><span class='line'>    $bc = mt_rand(0, 1);
+</span><span class='line'>
+</span><span class='line'>    $rndstring[$i] = strtoupper($rndstring[$i]);
+</span><span class='line'>
+</span><span class='line'>    $c_fontColor = $fontColor[mt_rand(0,4)];
+</span><span class='line'>
+</span><span class='line'>    $y_pos = $i==0 ? 4 : $i*($font_size+2);
+</span><span class='line'>
+</span><span class='line'>    $c = mt_rand(0, 15);
+</span><span class='line'>
+</span><span class='line'>    @imagettftext($im, $font_size, $c, $y_pos, 19, $c_fontColor, $font_file, $rndstring[$i]);
+</span><span class='line'>
+</span><span class='line'>    $lastc = $rndstring[$i];
+</span><span class='line'>
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
+<p>Imagettftext()函数没有成功的执行导致了验证码只显示背景 不显示字母</p>
 
-<h1>列出已知的ruby版本</h1>
+<p>具体原因为 字体文件路径不对.解决方法</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm list known</span></code></pre></td></tr></table></div></figure>
+<p>1确认include/data/fonts/ 里面存在字体文件  默认为ggbi.ttf</p>
 
+<p>2在for($i=0;$i&lt;$rndcodelen;$i++) 上一行 加上如下代码:</p>
 
-<p></p>
+<pre><code>        $font_file= str_replace("\\","/",$font_file);
+</code></pre>
 
-<h1>安装ruby 1.9.3</h1>
+<p> 即把字体文件路径中反斜杠替换成斜杠 因为我们知道反斜杠有转译字符的功能,</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.3  </span></code></pre></td></tr></table></div></figure>
+<p>$font_file 路经大体为 盘符:\appserv\www 系统错误的把反斜杠 当作转义用了 导致$font_file也就不是一个路径了 所以Imagettftext()函数总是返回错误</p>
 
+<p>加上$font_file= str_replace(&ldquo;\&rdquo;,&ldquo;/&rdquo;,$font_file);即可解决</p>
 
-<p><img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="image" /></p>
+<p>Dede后台验证码不显示情况三分析</p>
+
+<p> Include/data/words/words.txt 文件不存在</p>
+
+<p><code>解决方案1</code> 拷贝一个进去</p>
+
+<pre><code>           2找到代码    'word_type'  =&gt; (int)$safe_codetype,   // 1:数字  2:英文   3:单词
+
+            换成'word_type'  =&gt;1  (或2) 既验证码为数字或英文
+</code></pre>
+
+<p>Dede后台验证码不显示 全部情况解决</p>
+
+<p>如果原来可以显示后来取消验证码后再设置就无法显示，可以通过覆盖data与include目录试试。</p>
 </div>
 
 

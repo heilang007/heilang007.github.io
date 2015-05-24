@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rvm | My Octopress Blog]]></title>
   <link href="http://heilang007.github.io/blog/categories/rvm/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-24T09:07:37+08:00</updated>
+  <updated>2015-05-24T10:39:06+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,47 +14,104 @@
 
   
   <entry>
-    <title type="html"><![CDATA[第二Mac上更新Ruby]]></title>
+    <title type="html"><![CDATA[Dede后台验证码不显示解决方法详解(dedecms 5.7)]]></title>
     <link href="http://heilang007.github.io/blog/2015/05/24/twoblog/"/>
     <updated>2015-05-24T08:36:08+08:00</updated>
     <id>http://heilang007.github.io/blog/2015/05/24/twoblog</id>
-    <content type="html"><![CDATA[<h2>安装RVM</h2>
+    <content type="html"><![CDATA[<h2>通用解决方案&mdash;取消后台验证码功能</h2>
 
-<p><strong> RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) </strong></p>
+<p>因为没有验证码 不能进后台 所以修改php文件源代码:</p>
 
-<pre><code>$ curl -L get.rvm.io | bash -s stable 
+<p><code>方法一:</code></p>
+
+<p>打开dede/login.php 找到如下代码</p>
+
+<pre><code>
+    if(($validate=='' || $validate != $svali) &amp;&amp; preg_match("/6/",$safe_gdopen)){
+
+        ResetVdValue();
+
+        ShowMsg('验证码不正确!','login.php',0,1000);
+
+        exit;
+
+}
 </code></pre>
 
-<h2>等待一段时间后就可以成功安装好 RVM。</h2>
+<p>第一行替换为   if(false){</p>
 
-<pre><code>$ source ~/.bashrc  
-$ source ~/.bash_profile 
+<p>好 问题解决 不输验证码后台直接进去</p>
+
+<p><code>方法二</code></p>
+
+<p>打开data/safe/inc.safe.config.php</p>
+
+<p>把代码$safe_gdopen = &lsquo;1,2,3,4,5,6,7&rsquo;; 中的6,删除即可</p>
+
+<p>Dede后台验证码不显示情况一分析</p>
+
+<p>验证码需要GD库 请检查你的环境是否开启GD库</p>
+
+<p> Dede后台验证码不显示情况二分析</p>
+
+<p>验证码只显示背景 不显示字母</p>
+
+<p>打开验证码生成文件 Include/vdimgck.php</p>
+
+<p>找到</p>
+
+<pre><code>    for($i=0;$i&lt;$rndcodelen;$i++)
+
+    {
+
+        $bc = mt_rand(0, 1);
+
+        $rndstring[$i] = strtoupper($rndstring[$i]);
+
+        $c_fontColor = $fontColor[mt_rand(0,4)];
+
+        $y_pos = $i==0 ? 4 : $i*($font_size+2);
+
+        $c = mt_rand(0, 15);
+
+        @imagettftext($im, $font_size, $c, $y_pos, 19, $c_fontColor, $font_file, $rndstring[$i]);
+
+        $lastc = $rndstring[$i];
+
+}
 </code></pre>
 
-<h2>测试是否安装正常</h2>
+<p>Imagettftext()函数没有成功的执行导致了验证码只显示背景 不显示字母</p>
 
-<pre><code>rvm -v
+<p>具体原因为 字体文件路径不对.解决方法</p>
+
+<p>1确认include/data/fonts/ 里面存在字体文件  默认为ggbi.ttf</p>
+
+<p>2在for($i=0;$i&lt;$rndcodelen;$i++) 上一行 加上如下代码:</p>
+
+<pre><code>        $font_file= str_replace("\\","/",$font_file);
 </code></pre>
 
-<h2>2、用RVM升级Ruby</h2>
+<p> 即把字体文件路径中反斜杠替换成斜杠 因为我们知道反斜杠有转译字符的功能,</p>
 
-<h1>查看当前<a href="http://ruby.taobao.org">ruby</a>版本</h1>
+<p>$font_file 路经大体为 盘符:\appserv\www 系统错误的把反斜杠 当作转义用了 导致$font_file也就不是一个路径了 所以Imagettftext()函数总是返回错误</p>
 
-<pre><code>$ ruby -v  
-ruby 1.8.7
+<p>加上$font_file= str_replace(&ldquo;\&rdquo;,&ldquo;/&rdquo;,$font_file);即可解决</p>
+
+<p>Dede后台验证码不显示情况三分析</p>
+
+<p> Include/data/words/words.txt 文件不存在</p>
+
+<p><code>解决方案1</code> 拷贝一个进去</p>
+
+<pre><code>           2找到代码    'word_type'  =&gt; (int)$safe_codetype,   // 1:数字  2:英文   3:单词
+
+            换成'word_type'  =&gt;1  (或2) 既验证码为数字或英文
 </code></pre>
 
-<h1>列出已知的ruby版本</h1>
+<p>Dede后台验证码不显示 全部情况解决</p>
 
-<pre><code class="">$ rvm list known
-</code></pre>
-
-<h1>安装ruby 1.9.3</h1>
-
-<pre><code class="">$ rvm install 1.9.3  
-</code></pre>
-
-<p><img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="image" /></p>
+<p>如果原来可以显示后来取消验证码后再设置就无法显示，可以通过覆盖data与include目录试试。</p>
 ]]></content>
   </entry>
   
