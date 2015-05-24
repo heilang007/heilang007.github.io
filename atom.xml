@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://heilang007.github.io/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-24T09:05:29+08:00</updated>
+  <updated>2015-05-24T09:07:37+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[第二Mac上更新Ruby]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/24/twoblog/"/>
+    <updated>2015-05-24T08:36:08+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/24/twoblog</id>
+    <content type="html"><![CDATA[<h2>安装RVM</h2>
+
+<p><strong> RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) </strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -L get.rvm.io | bash -s stable </span></code></pre></td></tr></table></div></figure>
+
+
+<h2>等待一段时间后就可以成功安装好 RVM。</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bashrc  
+</span><span class='line'>$ source ~/.bash_profile </span></code></pre></td></tr></table></div></figure>
+
+
+<h2>测试是否安装正常</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm -v</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2、用RVM升级Ruby</h2>
+
+<h1>查看当前<a href="http://ruby.taobao.org">ruby</a>版本</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby -v  
+</span><span class='line'>ruby 1.8.7</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h1>列出已知的ruby版本</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm list known</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h1>安装ruby 1.9.3</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.3  </span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac上更新Ruby]]></title>
