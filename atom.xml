@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://heilang007.github.io/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-24T10:39:06+08:00</updated>
+  <updated>2015-05-24T10:48:49+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[thinkphp 漂亮的分页样式]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/24/fenye/"/>
+    <updated>2015-05-24T10:45:02+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/24/fenye</id>
+    <content type="html"><![CDATA[<p>首先:需要两个文件 page.class.php page.css
+1.在TP原有的 page.class.php 文件稍作修改几条代码就可以了, 修改过的地方我会注释,
+2.page.css 这个是24款分页的样式
+在模版中使用, 引入 page.css</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;load href=" !-PUBLIC-!/Css/page.css" / &gt; 
+</span><span class='line'>&lt;div class="green-black"&gt;&lt;{$page}&gt;&lt;div/&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果: 要变更分页的样式, 打开 page.css ,参照修改相对应的</p>
+
+<div class ="xxx"><{$page}></div>
+
+
+<p> 即可
+效果图:</p>
+
+<p><img src="http://www.thinkphp.cn/Uploads/editor/2013-06-29/51cea617a001e.png" alt="image" />
+<img src="http://www.thinkphp.cn/Uploads/editor/2013-06-29/51cea6d236b40.png" alt="image" /></p>
+
+<h2>有问题可以联系: QQ303440188 或php交流群 278528223</h2>
+
+<p><a href="http://www.thinkphp.cn/topic/download/id/2923.html">thinkphp分页.rar</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dede后台验证码不显示解决方法详解(dedecms 5.7)]]></title>

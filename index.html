@@ -7,16 +7,12 @@
 	<meta name="author" content="Your Name">
 
 	
-	<meta name="description" content="通用解决方案&mdash;取消后台验证码功能 因为没有验证码 不能进后台 所以修改php文件源代码: 方法一: 打开dede/login.php 找到如下代码 1
+	<meta name="description" content="首先:需要两个文件 page.class.php page.css
+1.在TP原有的 page.class.php 文件稍作修改几条代码就可以了, 修改过的地方我会注释,
+2.page.css 这个是24款分页的样式
+在模版中使用, 引入 page.css 1
 2
-3
-4
-5
-6
-7
-8
-9
-10 if(($validate=='' || $validate != $svali) && &hellip;">
+&lt;load href &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -87,6 +83,67 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/05/24/fenye/">
+		
+			Thinkphp 漂亮的分页样式</a>
+	</h2>
+	<div class="entry-content">
+		<p>首先:需要两个文件 page.class.php page.css
+1.在TP原有的 page.class.php 文件稍作修改几条代码就可以了, 修改过的地方我会注释,
+2.page.css 这个是24款分页的样式
+在模版中使用, 引入 page.css</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;load href=" !-PUBLIC-!/Css/page.css" / &gt; 
+</span><span class='line'>&lt;div class="green-black"&gt;&lt;{$page}&gt;&lt;div/&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果: 要变更分页的样式, 打开 page.css ,参照修改相对应的</p>
+
+<div class ="xxx"><{$page}></div>
+
+
+<p> 即可
+效果图:</p>
+
+<p><img src="http://www.thinkphp.cn/Uploads/editor/2013-06-29/51cea617a001e.png" alt="image" />
+<img src="http://www.thinkphp.cn/Uploads/editor/2013-06-29/51cea6d236b40.png" alt="image" /></p>
+
+<h2>有问题可以联系: QQ303440188 或php交流群 278528223</h2>
+
+<p><a href="http://www.thinkphp.cn/topic/download/id/2923.html">thinkphp分页.rar</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-24T10:45:02+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
