@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ruby | My Octopress Blog]]></title>
+  <title><![CDATA[Category: ruby | 开源中国技术博客]]></title>
   <link href="http://heilang007.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-24T10:57:50+08:00</updated>
+  <updated>2015-05-24T15:56:32+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Fan Jun]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
