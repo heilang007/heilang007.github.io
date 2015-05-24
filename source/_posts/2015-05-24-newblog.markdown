@@ -1,0 +1,40 @@
+---
+layout: post
+title: "Mac上更新Ruby"
+date: 2015-05-24 08:36:08 +0800
+comments: true
+categories: [Ruby,RVM]
+---
+
+## 安装RVM
+
+** RVM:Ruby Version Manager,Ruby版本管理器，包括Ruby的版本管理和Gem库管理(gemset) **
+
+```
+$ curl -L get.rvm.io | bash -s stable 
+```
+## 等待一段时间后就可以成功安装好 RVM。
+```
+$ source ~/.bashrc  
+$ source ~/.bash_profile 
+```
+## 测试是否安装正常
+```
+rvm -v
+```
+## 2、用RVM升级Ruby
+
+#查看当前[ruby](http://ruby.taobao.org)版本 
+```
+$ ruby -v  
+ruby 1.8.7
+```  
+#列出已知的ruby版本
+```  
+$ rvm list known
+```  
+#安装ruby 1.9.3
+```  
+$ rvm install 1.9.3  
+```
+![image](https://www.baidu.com/img/baidu_jgylogo3.gif) 
