@@ -3,12 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>php - 开源中国技术博客</title>
+	<title>ThinkPHP的一个BUG - 开源中国技术博客</title>
 	<meta name="author" content="Fan Jun">
 
 	
-	<meta name="description" content="
-">
+	<meta name="description" content="发现一个BUG 在用D来实例化模型的时候会有一个问题，那就是，如果把模型放在application/commond下，则会严格区分大小写。模型如果是Article而不能是article 但是如果是在admin/commond下则是会自己加把article改成Article的。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -80,9 +79,13 @@
 	
 	<div id="content" class="inner"><article class="page">
     
-    <h1 class="title">Php</h1>
+    <h1 class="title">ThinkPHP的一个BUG</h1>
     
-    <div class="entry-content">
+    <div class="entry-content"><h1>发现一个BUG</h1>
+
+<h2>在用D来实例化模型的时候会有一个问题，那就是，如果把模型放在application/commond下，则会严格区分大小写。模型如果是Article而不能是article</h2>
+
+<p>但是如果是在admin/commond下则是会自己加把article改成Article的。这样的不一至让我郁闷了一下。因为开发后台的时候我把Model都放在admin下，后来都迁移出来</p>
 </div>
 </article>
 
