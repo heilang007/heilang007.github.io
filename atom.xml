@@ -4,7 +4,7 @@
   <title><![CDATA[开源中国技术博客]]></title>
   <link href="http://heilang007.github.io/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-26T08:22:53+08:00</updated>
+  <updated>2015-05-27T20:23:55+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Fan Jun]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[thinkphp数据库操作类]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/27/thinkphp/"/>
+    <updated>2015-05-27T20:22:18+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/27/thinkphp</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>查询方法：
+</span><span class='line'>$db-&gt;table('user')-&gt;limit(10)-&gt;order('id desc')-&gt;select(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回二维数组。
+</span><span class='line'>SELECT * FROM `user` ORDER BY id desc LIMIT 10 
+</span><span class='line'>$where['user_name'] = array('like','%ly%');  
+</span><span class='line'>$where['credit'] = array('gt',100);  
+</span><span class='line'>$db-&gt;table('user')-&gt;where($where)-&gt;limit(10)-&gt;select(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回二维数组。
+</span><span class='line'>SELECT * FROM `user` WHERE ( `user_name` LIKE '%ly%' ) AND ( `credit` &gt; 100 ) LIMIT 10 
+</span><span class='line'>$where['credit'] = array(array('gt',100),array('eq',0),'or');  
+</span><span class='line'>$db-&gt;table('user')-&gt;where($where)-&gt;limit(10)-&gt;select(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回二维数组。
+</span><span class='line'>SELECT * FROM `user` WHERE ( (`credit` &gt; 100) OR (`credit` = 0) ) LIMIT 10 
+</span><span class='line'>$where['_string'] = 'credit&gt;100 and credit&lt;200';  
+</span><span class='line'>$db-&gt;table('user')-&gt;where($where)-&gt;limit(10)-&gt;select(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回二维数组。
+</span><span class='line'>SELECT * FROM `user` WHERE ( credit&gt;100 and credit&lt;200 ) LIMIT 10 
+</span><span class='line'>$where['user_name'] = 'lyly';  
+</span><span class='line'>$db-&gt;table('user')-&gt;field('credit')-&gt;where($where)-&gt;find(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回一维数组。
+</span><span class='line'>SELECT `credit` FROM `user` WHERE ( `user_name` = 'lyly' ) LIMIT 0,1 
+</span><span class='line'>$db-&gt;table('user')-&gt;where('id=2')-&gt;find(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回一维数组。
+</span><span class='line'>SELECT * FROM `user` WHERE id=2 LIMIT 0,1 
+</span><span class='line'>再来看看更新语句：
+</span><span class='line'>$where['user_name'] = 'lyly';  
+</span><span class='line'>$data['credit'] = 100;  
+</span><span class='line'>$db-&gt;table('user')-&gt;data($data)-&gt;where($where)-&gt;update(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回影响行数。
+</span><span class='line'>UPDATE `user` SET `credit`=100 WHERE ( `user_name` = 'lyly' ) 
+</span><span class='line'>$where['credit'] = array('elt',100);  
+</span><span class='line'>$data['credit'] = array('exp','credit+1');  
+</span><span class='line'>$db-&gt;table('user')-&gt;data($data)-&gt;where($where)-&gt;update(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回影响行数。
+</span><span class='line'>UPDATE `user` SET `credit`=credit+1 WHERE ( `credit` &lt;= 100 ) 
+</span><span class='line'>再来看看新增语句：
+</span><span class='line'>$data['user_name'] = 'hoho';  
+</span><span class='line'>$data['credit'] = 100;  
+</span><span class='line'>$db-&gt;table('user')-&gt;data($data)-&gt;insert(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回自增ID。
+</span><span class='line'>INSERT INTO `user` (`user_name`,`credit`) VALUES ('hoho',100) 
+</span><span class='line'>最后看看删除语句：
+</span><span class='line'>$where['credit'] = 0;  
+</span><span class='line'>$db-&gt;table('user')-&gt;where($where)-&gt;delete(); 
+</span><span class='line'>相当于执行下面的sql语句，并返回影响行数。
+</span><span class='line'>DELETE FROM `user` WHERE ( `credit` = 0 )
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP+jQuery+Ajax设置抽奖奖品和中奖概率]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | 开源中国技术博客]]></title>
   <link href="http://heilang007.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://heilang007.github.io/"/>
-  <updated>2015-05-26T08:22:53+08:00</updated>
+  <updated>2015-05-27T20:23:55+08:00</updated>
   <id>http://heilang007.github.io/</id>
   <author>
     <name><![CDATA[Fan Jun]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[thinkphp数据库操作类]]></title>
+    <link href="http://heilang007.github.io/blog/2015/05/27/thinkphp/"/>
+    <updated>2015-05-27T20:22:18+08:00</updated>
+    <id>http://heilang007.github.io/blog/2015/05/27/thinkphp</id>
+    <content type="html"><![CDATA[<pre><code>查询方法：
+$db-&gt;table('user')-&gt;limit(10)-&gt;order('id desc')-&gt;select(); 
+相当于执行下面的sql语句，并返回二维数组。
+SELECT * FROM `user` ORDER BY id desc LIMIT 10 
+$where['user_name'] = array('like','%ly%');  
+$where['credit'] = array('gt',100);  
+$db-&gt;table('user')-&gt;where($where)-&gt;limit(10)-&gt;select(); 
+相当于执行下面的sql语句，并返回二维数组。
+SELECT * FROM `user` WHERE ( `user_name` LIKE '%ly%' ) AND ( `credit` &gt; 100 ) LIMIT 10 
+$where['credit'] = array(array('gt',100),array('eq',0),'or');  
+$db-&gt;table('user')-&gt;where($where)-&gt;limit(10)-&gt;select(); 
+相当于执行下面的sql语句，并返回二维数组。
+SELECT * FROM `user` WHERE ( (`credit` &gt; 100) OR (`credit` = 0) ) LIMIT 10 
+$where['_string'] = 'credit&gt;100 and credit&lt;200';  
+$db-&gt;table('user')-&gt;where($where)-&gt;limit(10)-&gt;select(); 
+相当于执行下面的sql语句，并返回二维数组。
+SELECT * FROM `user` WHERE ( credit&gt;100 and credit&lt;200 ) LIMIT 10 
+$where['user_name'] = 'lyly';  
+$db-&gt;table('user')-&gt;field('credit')-&gt;where($where)-&gt;find(); 
+相当于执行下面的sql语句，并返回一维数组。
+SELECT `credit` FROM `user` WHERE ( `user_name` = 'lyly' ) LIMIT 0,1 
+$db-&gt;table('user')-&gt;where('id=2')-&gt;find(); 
+相当于执行下面的sql语句，并返回一维数组。
+SELECT * FROM `user` WHERE id=2 LIMIT 0,1 
+再来看看更新语句：
+$where['user_name'] = 'lyly';  
+$data['credit'] = 100;  
+$db-&gt;table('user')-&gt;data($data)-&gt;where($where)-&gt;update(); 
+相当于执行下面的sql语句，并返回影响行数。
+UPDATE `user` SET `credit`=100 WHERE ( `user_name` = 'lyly' ) 
+$where['credit'] = array('elt',100);  
+$data['credit'] = array('exp','credit+1');  
+$db-&gt;table('user')-&gt;data($data)-&gt;where($where)-&gt;update(); 
+相当于执行下面的sql语句，并返回影响行数。
+UPDATE `user` SET `credit`=credit+1 WHERE ( `credit` &lt;= 100 ) 
+再来看看新增语句：
+$data['user_name'] = 'hoho';  
+$data['credit'] = 100;  
+$db-&gt;table('user')-&gt;data($data)-&gt;insert(); 
+相当于执行下面的sql语句，并返回自增ID。
+INSERT INTO `user` (`user_name`,`credit`) VALUES ('hoho',100) 
+最后看看删除语句：
+$where['credit'] = 0;  
+$db-&gt;table('user')-&gt;where($where)-&gt;delete(); 
+相当于执行下面的sql语句，并返回影响行数。
+DELETE FROM `user` WHERE ( `credit` = 0 )
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP+jQuery+Ajax设置抽奖奖品和中奖概率]]></title>
